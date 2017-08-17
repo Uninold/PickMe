@@ -13,11 +13,7 @@ import android.widget.RelativeLayout;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
 public class MainActivity extends AppCompatActivity {
-    public static final String PASS_IMAGE = "";
-    private static final int PICK_IMAGE = 0;
     private Button shareBtn;
     private ImageView imgBtn;
     private RelativeLayout mainBg;
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto , 0);//one can be replaced with any action code
+                startActivityForResult(pickPhoto , 0);
             }
         });
         shareBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,20 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 break;
-            case 1:
-                if(resultCode == RESULT_OK){
-                    Uri selectedImage = imageReturnedIntent.getData();
-                    imgBtn.setVisibility(View.GONE);
-                    shareBtn.setVisibility(View.VISIBLE);
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(selectedImage);
-                        Drawable yourDrawable = Drawable.createFromStream(inputStream, selectedImage.toString() );
-                        mainBg.setBackground(yourDrawable);
-                    } catch (FileNotFoundException e) {
-                        Drawable yourDrawable = getResources().getDrawable(R.drawable.pick);
-                    }
-                }
-                break;
+
         }
     }
 
